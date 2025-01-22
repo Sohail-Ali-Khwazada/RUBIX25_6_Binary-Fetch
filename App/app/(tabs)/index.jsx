@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  Image,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
@@ -50,7 +51,11 @@ const BarCodeScanner = () => {
       end={{ x: 1, y: 1 }}
       style={styles.container}
     >
-      <Text style={styles.text}>Scan & Save the Planet!</Text>
+      {/* <Text style={styles.text}>Scan & Save the Planet!</Text> */}
+      <Image
+        source={require("./../../assets/images/logo-removebg-preview.png")}
+        style={{ width: 600, height: 600, marginLeft: 70 }}
+      />
 
       {/* Input for manual barcode entry */}
       <TextInput
@@ -88,7 +93,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    height: 40,
+    height: 60,
     width: "80%",
     borderColor: "#ddd",
     borderWidth: 1,
