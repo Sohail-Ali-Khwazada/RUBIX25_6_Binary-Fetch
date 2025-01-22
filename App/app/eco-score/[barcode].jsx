@@ -1,22 +1,21 @@
-import { View, Text, StyleSheet, Image, FlatList, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import { useEffect, useState } from "react";
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons"; // For icons
 
-// Helper function for eco-score grading colors
 const getEcoScoreColor = (grade) => {
   switch (grade) {
     case "A":
-      return "#4CAF50"; // Green for A
+      return "#4CAF50"; // Green
     case "B":
-      return "#8BC34A"; // Light Green for B
+      return "#8BC34A"; // Light Green
     case "C":
-      return "#FFEB3B"; // Yellow for C
+      return "#FFEB3B"; // Yellow
     case "D":
-      return "#FF9800"; // Orange for D
+      return "#FF9800"; // Orange
     case "E":
-      return "#F44336"; // Red for E
+      return "#F44336"; // Red
     default:
       return "#ddd"; // Gray for not applicable
   }
@@ -24,8 +23,7 @@ const getEcoScoreColor = (grade) => {
 
 const EcoScore = () => {
   const [productInfo, setProductInfo] = useState(null);
-
-  const {barcode} = useLocalSearchParams();
+  const { barcode } = useLocalSearchParams();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,11 +35,11 @@ const EcoScore = () => {
         console.log("Data", data.product);
         setProductInfo(data.product);
       } catch (e) {
-        console.log(e);
+        console.error(e);
       }
     };
     fetchData();
-  }, []);
+  }, [barcode]);
 
   return (
     <LinearGradient
@@ -51,8 +49,9 @@ const EcoScore = () => {
       style={styles.container}
     >
       <ScrollView>
+        {/* Header */}
         <View style={styles.headerContainer}>
-          <Text style={styles.barcodeText}>🌿 Scan Results 🌿</Text>
+          <Text style={styles.titleText}>🌿 Scan Results 🌿</Text>
           <Image
             style={styles.productImage}
             source={{ uri: productInfo?.image_url }}
@@ -62,50 +61,62 @@ const EcoScore = () => {
           </Text>
         </View>
 
-        <View style={styles.detailsContainer}>
-          <Text style={styles.title}>
-            <Ionicons name="barcode-outline" size={20} color="#333" /> Barcode:
+        {/* Details */}
+        <View style={styles.card}>
+          <Text style={styles.label}>
+            <Ionicons name="barcode-outline" size={18} color="#4CAF50" /> Barcode:
           </Text>
-          <Text style={styles.detailText}>{productInfo?.code}</Text>
+          <Text style={styles.value}>{barcode || "Not Available"}</Text>
+        </View>
 
-          <Text style={styles.title}>
-            <Ionicons name="pricetag-outline" size={20} color="#333" /> Brand:
+        <View style={styles.card}>
+          <Text style={styles.label}>
+            <Ionicons name="pricetag-outline" size={18} color="#4CAF50" /> Brand:
           </Text>
-          <Text style={styles.detailText}>{productInfo?.brands || "Unknown"}</Text>
+          <Text style={styles.value}>
+            {productInfo?.brands || "Not Available"}
+          </Text>
+        </View>
 
-          <Text style={styles.title}>
-            <Ionicons name="leaf-outline" size={20} color="#333" /> Eco-Score:
+        <View style={styles.card}>
+          <Text style={styles.label}>
+            <Ionicons name="leaf-outline" size={18} color="#4CAF50" /> Eco-Score:
           </Text>
           <Text
             style={[
-              styles.gradeText,
-              { backgroundColor: getEcoScoreColor(productInfo?.ecoscore_grade.toUpperCase()) },
+              styles.grade,
+              { backgroundColor: getEcoScoreColor(productInfo?.ecoscore_grade.toUpperCase() || "C") },
             ]}
           >
-            {productInfo?.ecoscore_grade.toUpperCase() || "N/A"}
+            {productInfo?.ecoscore_grade?.toUpperCase() || "C"}
           </Text>
+        </View>
 
-          <Text style={styles.title}>
-            <Ionicons name="cube-outline" size={20} color="#333" /> Packaging:
+        <View style={styles.card}>
+          <Text style={styles.label}>
+            <Ionicons name="cube-outline" size={18} color="#4CAF50" /> Packaging:
           </Text>
-          <Text style={styles.detailText}>
-            {productInfo?.packaging || "No Information"}
+          <Text style={styles.value}>
+            {productInfo?.packaging.split(",").join(", ")  || "Not Available"}
           </Text>
+        </View>
 
-          <Text style={styles.title}>
-            <Ionicons name="restaurant-outline" size={20} color="#333" /> Nutrition Grade:
+        <View style={styles.card}>
+          <Text style={styles.label}>
+            <Ionicons name="restaurant-outline" size={18} color="#4CAF50" /> Nutrition Grade:
           </Text>
-          <Text style={styles.detailText}>
-            {productInfo?.nutriscore_grade?.toUpperCase() || "N/A"}
+          <Text style={styles.value}>
+            {productInfo?.nutriscore_grade?.toUpperCase() || "Not Available"}
           </Text>
-          
-          <Text style={styles.title}>
-            <Ionicons name="globe-outline" size={20} color="#333" /> Sold In:
-          </Text>
-          <Text style={styles.detailText}>
-            {productInfo?.countries || "No Information"}
-          </Text>
+        </View>
 
+        <View style={styles.card}>
+          <Text style={styles.label}>
+            <Ionicons name="globe-outline" size={18} color="#4CAF50" /> Sold In:
+          </Text>
+          <Text style={styles.value}>
+            {productInfo?.countries.split(",").join(", ") || "Not Available"}
+          </Text>
         </View>
       </ScrollView>
     </LinearGradient>
@@ -116,14 +127,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 50,
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
   },
   headerContainer: {
     alignItems: "center",
     marginBottom: 20,
   },
-  barcodeText: {
-    fontSize: 28,
+  titleText: {
+    fontSize: 26,
     fontWeight: "bold",
     color: "#fff",
     marginBottom: 10,
@@ -131,49 +142,48 @@ const styles = StyleSheet.create({
   productImage: {
     width: 200,
     height: 200,
-    borderRadius: 20,
-    marginBottom: 15,
+    borderRadius: 15,
+    marginBottom: 10,
     resizeMode: "contain",
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: "#fff",
   },
   productName: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: "bold",
     color: "#333",
     textAlign: "center",
   },
-  detailsContainer: {
+  card: {
     backgroundColor: "#fff",
-    borderRadius: 15,
-    padding: 20,
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 10,
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 10,
-    marginBottom: 20,
+    elevation: 2,
   },
-  title: {
-    fontSize: 18,
+  label: {
+    fontSize: 16,
     fontWeight: "600",
     color: "#333",
     marginBottom: 5,
-    display: "flex",
-    alignItems: "center",
   },
-  detailText: {
+  value: {
     fontSize: 16,
     color: "#555",
-    marginBottom: 10,
+    lineHeight: 22,
   },
-  gradeText: {
-    fontSize: 20,
+  grade: {
+    fontSize: 18,
     fontWeight: "bold",
     color: "#fff",
-    textAlign: "center",
     paddingVertical: 5,
-    borderRadius: 8,
+    textAlign: "center",
+    borderRadius: 5,
     overflow: "hidden",
-    marginBottom: 10,
+    marginTop: 5,
   },
 });
 
