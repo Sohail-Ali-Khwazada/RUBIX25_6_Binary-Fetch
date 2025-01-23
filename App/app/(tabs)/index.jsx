@@ -63,7 +63,7 @@ const BarCodeScanner = () => {
         placeholder="Enter Product Name"
         value={productName}
         onChangeText={setProductName}
-        keyboardType="numeric" // Ensure numeric input for barcode
+        // keyboardType="numeric" // Ensure numeric input for barcode
       />
 
       {/* Button to handle manual barcode input */}
