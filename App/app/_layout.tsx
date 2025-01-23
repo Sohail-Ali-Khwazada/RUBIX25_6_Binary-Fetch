@@ -35,14 +35,38 @@ export default function RootLayout() {
   return (
     <GlobalProvider>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack>
+        <Stack
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#4caf50", // Slightly darker green
+            },
+            headerTintColor: "#fff", // White text for contrast
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 18,
+            },
+          }}
+        >
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="scanner" options={{ headerShown: true }} />
+          <Stack.Screen
+            name="scanner"
+            options={{
+              headerShown: true,
+              title: "Scan Product",
+            }}
+          />
           <Stack.Screen
             name="eco-score/[barcode]"
             options={{
               headerShown: true,
               title: "Product Details",
+            }}
+          />
+          <Stack.Screen
+            name="alternateproduct/[barcode]"
+            options={{
+              headerShown: false,
+              title: "Alternate Products",
             }}
           />
           {/* <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}

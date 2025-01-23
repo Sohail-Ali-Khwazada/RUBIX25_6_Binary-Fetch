@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons"; // For icons
 
@@ -32,7 +32,6 @@ const EcoScore = () => {
           `https://world.openfoodfacts.org/api/v2/product/${barcode}`
         );
         const data = await res.json();
-        console.log("Data", data.product);
         setProductInfo(data.product);
       } catch (e) {
         console.error(e);
@@ -61,6 +60,22 @@ const EcoScore = () => {
           </Text>
         </View>
 
+        {/* Buttons */}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.alternateButton}
+            onPress={() => router.push(`/alternateproduct/${barcode}`)}
+          >
+            <Ionicons name="refresh-outline" size={20} color="#fff" />
+            <Text style={styles.buttonText}>Find Alternatives</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.addToCartButton}>
+            <Ionicons name="cart-outline" size={20} color="#fff" />
+            <Text style={styles.buttonText}>Add to Cart</Text>
+          </TouchableOpacity>
+        </View>
+
         {/* Details */}
         <View style={styles.card}>
           <Text style={styles.label}>
@@ -85,26 +100,24 @@ const EcoScore = () => {
           <Text
             style={[
               styles.grade,
-              { backgroundColor: getEcoScoreColor(productInfo?.ecoscore_grade.toUpperCase() || "C") },
+              { backgroundColor: getEcoScoreColor(productInfo?.ecoscore_grade?.toUpperCase() || "C") },
             ]}
           >
             {productInfo?.ecoscore_grade?.toUpperCase() || "C"}
           </Text>
 
           <Text style={styles.title}>
-                      <Ionicons name="information-circle-outline" size={20} color="#333" /> Eco-Score Details: 
-                      {productInfo?.ecoscore_score || "30"}
+            <Ionicons name="information-circle-outline" size={20} color="#333" /> Eco-Score Details: 
+            {productInfo?.ecoscore_score || "30"}
           </Text>
         </View>
-
-        
 
         <View style={styles.card}>
           <Text style={styles.label}>
             <Ionicons name="cube-outline" size={18} color="#4CAF50" /> Packaging:
           </Text>
           <Text style={styles.value}>
-            {productInfo?.packaging.split(",").join(", ")  || "Not Available"}
+            {productInfo?.packaging?.split(",").join(", ")  || "Not Available"}
           </Text>
         </View>
 
@@ -122,7 +135,7 @@ const EcoScore = () => {
             <Ionicons name="globe-outline" size={18} color="#4CAF50" /> Sold In:
           </Text>
           <Text style={styles.value}>
-            {productInfo?.countries.split(",").join(", ") || "Not Available"}
+            {productInfo?.countries?.split(",").join(", ") || "Not Available"}
           </Text>
         </View>
       </ScrollView>
@@ -191,6 +204,41 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     overflow: "hidden",
     marginTop: 5,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginVertical: 15,
+  },
+  alternateButton: {
+    flexDirection: "row",
+    backgroundColor: "#FF9800",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    marginRight: 10,
+    elevation: 3,
+  },
+  addToCartButton: {
+    flexDirection: "row",
+    backgroundColor: "#4CAF50",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    marginLeft: 10,
+    elevation: 3,
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
+    marginLeft: 8,
   },
 });
 
