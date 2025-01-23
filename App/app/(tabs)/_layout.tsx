@@ -80,6 +80,15 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="ach"
+        options={{
+          title: "Achievements",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="trophy" size={size || 28} color={color} />
+          ),
+        }}
+      />
 
 
       {/* <Tabs.Screen
