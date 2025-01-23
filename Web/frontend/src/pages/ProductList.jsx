@@ -10,7 +10,7 @@ const ProductList = () => {
   const dummyProduct = {
     product_name: "Dummy Product",
     ecoscore_score: 50, // Eco Score for the dummy product
-    categories:['milk','cheese']
+    categories:['drinks']
   };
 
   const searchTerms = dummyProduct.categories; // Multiple search terms
@@ -131,19 +131,19 @@ const Product = ({ product }) => {
             : "N/A"}
         </p>
         <p>
-          <strong>Allergens:</strong>{" "}
+          <strong>Allergens:</strong>{"  "}
           {product.allergens_tags
             ? cleanCategories(product.allergens_tags).join(", ")
             : "None"}
         </p>
         <p className="flex justify-between">
-          <p><strong>Nutrition Score:</strong>{""}
+          <p><strong>Nutrition Score:</strong>{"  "}
           {product.nutriscore_score|| "N/A"}</p>
-          <p><strong>Nutrition Grade:</strong>{" "}
+          <p><strong>Nutrition Grade:</strong>{"  "}
           {product.nutrition_grades?.toUpperCase() || "N/A"}</p>
         </p>
         <p>
-          <strong>Carbon Foot Print:</strong>{" "}
+          <strong>Carbon Foot Print:</strong>{"   "}
           {product.nutriments["carbon-footprint_100g"] ||
             product.nutriments["carbon-footprint-from-known-ingredients_product"] ||
             "None"}

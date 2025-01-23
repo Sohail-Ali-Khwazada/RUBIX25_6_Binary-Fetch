@@ -9,6 +9,7 @@ import { Profile } from "./pages/Profile";
 import { Toaster } from "react-hot-toast";
 import { AuthContextProvider } from "./context/AuthContext";
 import ProductList from "./pages/ProductList";
+import Achievements from "./pages/Achievements";
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,11 @@ const router = createBrowserRouter([
       {
         path:'/product-list',
         element: <ProductList/>
-      }
+      },
+      {
+        path:'/achievements',
+        element: <Achievements/>
+      },
     ],
   },
 ]);

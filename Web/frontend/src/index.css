@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+@layer components {
+  .achievement-card {
+    @apply bg-white p-6 rounded-lg shadow-lg;
+  }
+  .progress-bar {
+    @apply bg-gray-200 rounded-full h-4 relative;
+  }
+  .progress-text {
+    @apply absolute inset-0 flex justify-center items-center text-white text-sm font-bold;
+  }
+}
