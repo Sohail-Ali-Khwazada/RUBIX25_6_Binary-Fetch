@@ -44,7 +44,11 @@
     "react-native-webview": "13.12.5",
     "expo-image": "~2.0.4",
     "@shopify/flash-list": "1.7.1",
-    "expo-dev-client": "~5.0.10"
+    "expo-dev-client": "~5.0.10",
+    "expo-location": "~18.0.5",
+    "react-native-maps": "1.18.0",
+    "@react-native-community/netinfo": "11.4.1",
+    "expo-device": "~7.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

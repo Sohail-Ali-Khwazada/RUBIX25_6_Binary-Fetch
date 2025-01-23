@@ -6,6 +6,8 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+// import Feather from '@expo/vector-icons/Feather';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 // Additional imports
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -34,6 +36,15 @@ export default function TabLayout() {
           title: 'Community',
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="house.fill" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="retail-finder"
+        options={{
+          title: 'Find Retailers',
+          tabBarIcon: ({ color }) => (
+            <FontAwesome5 name="map-marker-alt" size={28} color={color} />
           ),
         }}
       />

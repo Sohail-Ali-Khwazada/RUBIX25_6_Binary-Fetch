@@ -24,6 +24,12 @@
     },
     "plugins": [
       [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow EcoSathi to use your location."
+        }
+      ], 
+      [
         "expo-camera",
         {
           "cameraPermission": "Allow EcoSathi to access your camera",
