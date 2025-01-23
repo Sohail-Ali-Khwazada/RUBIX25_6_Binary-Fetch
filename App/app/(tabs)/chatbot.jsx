@@ -9,7 +9,7 @@ const MistralChatbot = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const API_URL = 'https://api-inference.huggingface.co/models/mistralai/Mistral-Nemo-Instruct-2407';
-  const API_TOKEN = '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'; // Replace with actual token
+  const API_TOKEN = process.env.EXPO_PUBLIC_HUGGING_FACE_API_URL; // Replace with actual token
 
   const sendMessage = async () => {
     if (!input.trim()) return;
