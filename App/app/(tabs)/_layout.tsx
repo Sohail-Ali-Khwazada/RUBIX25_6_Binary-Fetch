@@ -10,6 +10,10 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 
 
 
+// import Feather from '@expo/vector-icons/Feather';
+
+
+
 
 // Additional imports
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';

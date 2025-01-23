@@ -33,24 +33,20 @@ export default function RootLayout() {
   }
 
   return (
-    <GlobalProvider>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="scanner" options={{ headerShown: true }} />
-          <Stack.Screen name="sign-in" options={{ headerShown: false }} />
-          <Stack.Screen name="sign-up" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="eco-score/[barcode]"
-            options={{
-              headerShown: true,
-              title: "Product Details",
-            }}
-          />
-          <Stack.Screen name="profile" options={{ title: "Profile" }} />
-          <Stack.Screen name="+not-found" options={{ title: "Oops!" }} />
-        </Stack>
-      </ThemeProvider>
-    </GlobalProvider>
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="scanner" options={{ headerShown: true }} />
+        <Stack.Screen 
+          name="eco-score/[barcode]" 
+          options={{ 
+            headerShown: true,
+            title: 'Product Details'
+          }} 
+        />
+        {/* <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
+        <Stack.Screen name="+not-found" options={{ title: 'Oops!' }} />
+      </Stack>
+    </ThemeProvider>
   );
 }
