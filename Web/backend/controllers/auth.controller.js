@@ -5,12 +5,11 @@ import generateTokenAndSetCookie from "../utils/generateToken.js";
 
 export const signUp = async (req, res) => {
   try {
-    const { fullName, username, password, confirmPassword, gender } = req.body;
+    const { username, password, gender } = req.body;
 
-
-    if (password !== confirmPassword) {
-      return res.status(400).json({ error: "Passwords don't match" });
-    }
+    console.log('Username:', username);
+    console.log('Password:', password);
+    console.log('gender', gender)
 
     const user = await User.findOne({ username });
     if (user) {
@@ -23,13 +22,15 @@ export const signUp = async (req, res) => {
     const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
     const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
 
+    
     const newUser = await User.create({
-      fullName,
       username,
       password: hashPassword,
       gender,
       profilePic: gender === "male" ? boyProfilePic : girlProfilePic
     })
+    
+    // console.log('Working before create');
 
     if (newUser) {
 
@@ -79,10 +80,10 @@ export const loginUser = async (req, res) => {
 
 export const logoutUser = (req, res) => {
   try {
-
     res.status(200).json({message: "Logged out successfully"});
   } catch (error) {
     console.log("Error in logout controller", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
