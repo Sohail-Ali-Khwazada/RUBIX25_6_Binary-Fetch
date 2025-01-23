@@ -48,6 +48,7 @@ const EcoScore = () => {
       end={{ x: 0, y: 1 }}
       style={styles.container}
     >
+      
       <ScrollView>
         {/* Header */}
         <View style={styles.headerContainer}>

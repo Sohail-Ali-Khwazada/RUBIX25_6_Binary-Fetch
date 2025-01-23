@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
+import { useGlobalContext } from '@/context/GlobalProvider';
 
 const MessageForm = ({ onAddMessage }) => {
   const [text, setText] = useState('');
-  const [name, setName] = useState(''); // The name will be the username
+  const { user } = useGlobalContext();
+
 
   const handleSubmit = async () => {
-    if (!text.trim() || !name.trim()) {
-      Alert.alert('Missing Fields', 'Please provide both a name and a message.');
+    if (!text.trim()) {
+      Alert.alert('Missing Fields', 'Please provide a message.');
       return;
     }
 
     const messageData = {
-      username: name, // Using name as username
+      username: user?.username || "ashish123", // Using name as username
       text,
       timestamp: new Date().toISOString(),
     };
@@ -21,7 +23,6 @@ const MessageForm = ({ onAddMessage }) => {
     try {
       const response = await axios.post(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/community/add-message`, messageData);
       setText(''); // Clear message text
-      setName(''); // Clear name
       onAddMessage(response.data); // Assuming the API returns the created message
     } catch (error) {
       console.error('Error sending message:', error);
@@ -30,13 +31,6 @@ const MessageForm = ({ onAddMessage }) => {
 
   return (
     <View style={styles.formContainer}>
-      <TextInput
-        style={styles.input}
-        placeholder="Your name"
-        placeholderTextColor="#808080" 
-        value={name}
-        onChangeText={setName}
-      />
       <TextInput
         style={styles.input}
         placeholder="Type your message..."

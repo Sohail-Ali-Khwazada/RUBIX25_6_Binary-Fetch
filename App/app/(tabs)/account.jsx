@@ -4,9 +4,9 @@ import { router } from 'expo-router';
 import { useGlobalContext } from '@/context/GlobalProvider';
 
 const Account = () => {
-  const { user } = useGlobalContext();
-
-  // console.log('User:', user);
+  // const { user } = useGlobalContext();
+  const user={"_id": "679280408a9bd09d9a1c1952", "profilePic": "https://avatar.iran.liara.run/public/boy?username=Ashishq", "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzkyODA0MDhhOWJkMDlkOWExYzE5NTIiLCJpYXQiOjE3Mzc2NTY2NzIsImV4cCI6MTczODk1MjY3Mn0.WGZx68-MMCzYpKEwnufWMVF3HKofuiqgIfeOAg7w8vQ", "username": "Ashishq"}
+  console.log('User:', user);
 
   const navigateToLogin = () => {
     router.push('/sign-up'); // Navigate to sign-up page if no user
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Added semi-transparent overlay for better text visibility
-    padding: 30,
+    padding: 20,
     borderRadius: 10,
   },
   title: {
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     marginBottom: 20,
     borderRadius: 30,
-    width: '80%',
+    width: '90%',
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },

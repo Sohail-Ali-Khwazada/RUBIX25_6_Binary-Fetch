@@ -1,11 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { View, StyleSheet, FlatList, Text, RefreshControl } from 'react-native';
 import MessageForm from './../../components/MessageForm';
+import { useGlobalContext } from '@/context/GlobalProvider';
+
 
 const CommunityForum = () => {
   const [messages, setMessages] = useState([]);
   const [refreshing, setRefreshing] = useState(false); // State to track refreshing
   const flatListRef = useRef(); // Reference to FlatList
+
+  const {user} = useGlobalContext();
 
   // Fetch messages from the server
   const fetchMessages = async () => {
