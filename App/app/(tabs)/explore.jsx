@@ -83,6 +83,11 @@ const EcoScore = () => {
           </Text>
 
           <Text style={styles.title}>
+            <Ionicons name="information-circle-outline" size={20} color="#333" /> Eco-Score Details: 
+            {productInfo?.ecoscore_score || "30"}
+          </Text>
+
+          <Text style={styles.title}>
             <Ionicons name="cube-outline" size={20} color="#333" /> Packaging:
           </Text>
           <Text style={styles.detailText}>

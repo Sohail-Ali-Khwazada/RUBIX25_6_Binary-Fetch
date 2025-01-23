@@ -80,7 +80,7 @@ const EcoScore = () => {
 
         <View style={styles.card}>
           <Text style={styles.label}>
-            <Ionicons name="leaf-outline" size={18} color="#4CAF50" /> Eco-Score:
+            <Ionicons name="leaf-outline" size={18} color="#4CAF50" /> Eco-Score Grade:
           </Text>
           <Text
             style={[
@@ -90,7 +90,14 @@ const EcoScore = () => {
           >
             {productInfo?.ecoscore_grade?.toUpperCase() || "C"}
           </Text>
+
+          <Text style={styles.title}>
+                      <Ionicons name="information-circle-outline" size={20} color="#333" /> Eco-Score Details: 
+                      {productInfo?.ecoscore_score || "30"}
+          </Text>
         </View>
+
+        
 
         <View style={styles.card}>
           <Text style={styles.label}>

@@ -54,7 +54,7 @@ const BarCodeScanner = () => {
       {/* <Text style={styles.text}>Scan & Save the Planet!</Text> */}
       <Image
         source={require("./../../assets/images/logo-removebg-preview.png")}
-        style={{ width: 600, height: 600, marginLeft: 70 }}
+        style={{ width: 450, height: 450, marginLeft: 70 }}
       />
 
       {/* Input for manual barcode entry */}
