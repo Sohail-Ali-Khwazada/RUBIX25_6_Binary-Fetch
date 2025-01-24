@@ -1,6 +1,14 @@
 import { useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, FlatList, ActivityIndicator, StyleSheet, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  FlatList,
+  ActivityIndicator,
+  StyleSheet,
+  SafeAreaView,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 const ProductList = () => {
@@ -17,11 +25,13 @@ const ProductList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`https://world.openfoodfacts.net/api/v2/product/${barcode}`);
+        const response = await fetch(
+          `https://world.openfoodfacts.net/api/v2/product/${barcode}`
+        );
         const data = await response.json();
 
         const product_name = data.product.product_name;
-        const eco = data.product.ecoscore_score || 10;
+        const eco = data.product.ecoscore_score;
         const categories = data.product.categories_old || [];
 
         setProductname(product_name);
@@ -60,7 +70,7 @@ const ProductList = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [ecoscore]);
 
   if (loading) {
     return (
@@ -86,16 +96,23 @@ const ProductList = () => {
   return (
     <LinearGradient colors={["#c8f7c5", "#a8e6cf"]} style={styles.gradient}>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.header}>🌿 Alternatives with Better Eco Scores</Text>
+        <Text style={styles.header}>
+          🌿 Alternatives with Better Eco Scores
+        </Text>
         <Text style={styles.subHeader}>
-          Your Product: <Text style={styles.bold}>{product_name}</Text> (Eco Score: {ecoscore})
+          Your Product: <Text style={styles.bold}>{product_name}</Text> (Eco
+          Score: {ecoscore})
         </Text>
 
         <FlatList
           data={filteredProducts}
           keyExtractor={(item, index) => item.code || index.toString()}
           renderItem={({ item }) => <Product product={item} />}
-          ListEmptyComponent={<Text style={styles.noDataText}>No alternatives with better Eco Scores found.</Text>}
+          ListEmptyComponent={
+            <Text style={styles.noDataText}>
+              No alternatives with better Eco Scores found.
+            </Text>
+          }
         />
       </SafeAreaView>
     </LinearGradient>
@@ -118,18 +135,33 @@ const Product = ({ product }) => {
       )}
 
       <Text style={styles.productName}>
-        {product.product_name_en || product.product_name_es || product.product_name || "Unknown Product"}
+        {product.product_name_en ||
+          product.product_name_es ||
+          product.product_name ||
+          "Unknown Product"}
       </Text>
 
       <Text style={styles.detailText}>
-        <Text style={styles.bold}>Eco Score:</Text> {product.ecoscore_score || "None"}
+        <Text style={styles.bold}>Eco Score:</Text>{" "}
+        {product.ecoscore_score || "None"}
+      </Text>
+
+      <Text style={styles.detailText}>
+        <Text style={styles.bold}>Carbon Foot Print:</Text>{" "}
+        {product.nutriments["carbon-footprint_100g"] ||
+          product.nutriments[
+            "carbon-footprint-from-known-ingredients_product"
+          ] ||
+          80}
       </Text>
       <Text style={styles.detailText}>
         <Text style={styles.bold}>Brand:</Text> {product.brands || "N/A"}
       </Text>
       <Text style={styles.detailText}>
         <Text style={styles.bold}>Categories:</Text>{" "}
-        {product.categories_tags ? cleanCategories(product.categories_tags).join(", ") : "N/A"}
+        {product.categories_tags
+          ? cleanCategories(product.categories_tags).join(", ")
+          : "N/A"}
       </Text>
     </View>
   );
