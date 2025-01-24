@@ -34,6 +34,10 @@ const ProfilePage = () => {
           <Text style={styles.bio}>Eco-conscious traveler 🌍🌱</Text>
 
           {/* Profile Actions */}
+          <TouchableOpacity style={styles.button} onPress={()=> router.push("/badge")}>
+            <Text style={styles.buttonText}>Badge</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity style={styles.button} onPress={handleLogout}>
             <Text style={styles.buttonText}>Logout</Text>
           </TouchableOpacity>

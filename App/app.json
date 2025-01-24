@@ -28,7 +28,7 @@
         {
           "locationAlwaysAndWhenInUsePermission": "Allow EcoSathi to use your location."
         }
-      ], 
+      ],
       [
         "expo-camera",
         {

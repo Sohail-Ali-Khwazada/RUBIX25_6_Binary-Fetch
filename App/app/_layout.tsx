@@ -47,6 +47,8 @@ export default function RootLayout() {
               title: "Product Details",
             }}
           />
+
+          <Stack.Screen name="badge" options={{ title: "Badge" }} />
           <Stack.Screen name="profile" options={{ title: "Profile" }} />
           <Stack.Screen name="+not-found" options={{ title: "Oops!" }} />
         </Stack>
