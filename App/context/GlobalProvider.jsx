@@ -8,6 +8,7 @@ export const useGlobalContext = () => useContext(GlobalContext);
 const GlobalProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [flagAchievements, setFlagAchievements] = useState(false);
   const [language, setLanguage] = useState("en");
 
   return (
@@ -16,7 +17,9 @@ const GlobalProvider = ({ children }) => {
         user,
         setUser,
         loading,
-        setLoading, 
+        setLoading,
+        flagAchievements,
+        setFlagAchievements,
         language, 
         setLanguage
       }}

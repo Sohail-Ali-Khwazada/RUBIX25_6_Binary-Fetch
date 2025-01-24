@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
     profilePic: {
       type: String,
       default: ""
+    },
+    GreenPoints: {
+      type: Number,
+      default: 0
     }
 },{timestamps:true});
 

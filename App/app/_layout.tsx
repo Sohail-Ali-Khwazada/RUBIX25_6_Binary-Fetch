@@ -35,7 +35,18 @@ export default function RootLayout() {
   return (
     <GlobalProvider>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack>
+        <Stack
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#4caf50", // Slightly darker green
+            },
+            headerTintColor: "#fff", // White text for contrast
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 18,
+            },
+          }}
+        >
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="scanner" options={{ headerShown: true }} />
           <Stack.Screen name="sign-in" options={{ headerShown: false }} />
@@ -47,9 +58,16 @@ export default function RootLayout() {
               title: "Product Details",
             }}
           />
-
+          <Stack.Screen
+            name="alternateproduct/[barcode]"
+            options={{
+              headerShown: false,
+              title: "Alternate Products",
+            }}
+          />
           <Stack.Screen name="badge" options={{ title: "Badge" }} />
           <Stack.Screen name="profile" options={{ title: "Profile" }} />
+          {/* <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
           <Stack.Screen name="+not-found" options={{ title: "Oops!" }} />
         </Stack>
       </ThemeProvider>

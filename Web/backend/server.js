@@ -3,8 +3,9 @@ import express from "express";
 import cors from "cors";
 import connectDb from "./db/db_connect.js";
 
-import authRoutes from "./routes/auth.route.js"
-import communityRoutes from "./routes/community.route.js"
+import authRoutes from "./routes/auth.route.js";
+import communityRoutes from "./routes/community.route.js";
+import userRoutes from "./routes/user.route.js";
 
 
 
@@ -17,6 +18,7 @@ app.use(cors());
 
 app.use("/api/auth",authRoutes);
 app.use("/api/community",communityRoutes);
+app.use("/api/user",userRoutes);
 
 
 app.get("/",(req,res)=>{
