@@ -1,0 +1,76 @@
+/* popup.css */
+
+/* Global reset for styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #fff, #f4f9ff);
+}
+
+h1 {
+  font-size: 20px;
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #fff;
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  color: #555;
+}
+
+footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+footer a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+footer a:hover {
+  color: #2980b9;
+}
+
+/* Adjust for smaller screens */
+@media (max-width: 600px) {
+  body {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  li {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

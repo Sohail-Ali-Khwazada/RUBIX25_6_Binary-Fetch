@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Cart Extractor",
+  "version": "1.0",
+  "description": "Extract cart items from Zepto and Swiggy",
+  "permissions": ["storage"],
+  "host_permissions": ["*://*.zeptonow.com/*", "*://*.swiggy.com/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.zeptonow.com/*", "*://*.swiggy.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "View Cart Items"
+  }
+}
