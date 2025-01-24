@@ -50,7 +50,10 @@ export default function RootLayout() {
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="scanner" options={{ headerShown: true }} />
           <Stack.Screen name="sign-in" options={{ headerShown: false }} />
-          <Stack.Screen name="sign-up" options={{ headerShown: false }} />
+          <Stack.Screen name="sign-up" options={{ headerShown: false }} />  
+          <Stack.Screen name="achievement" options={{ headerShown: false }} />  
+          <Stack.Screen name="leaderboard" options={{ headerShown: false }} />  
+          <Stack.Screen name="rewards/[badge]" options={{ headerShown: false }} />  
           <Stack.Screen
             name="eco-score/[barcode]"
             options={{
@@ -65,9 +68,7 @@ export default function RootLayout() {
               title: "Alternate Products",
             }}
           />
-          <Stack.Screen name="badge" options={{ title: "Badge" }} />
           <Stack.Screen name="profile" options={{ title: "Profile" }} />
-          {/* <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
           <Stack.Screen name="+not-found" options={{ title: "Oops!" }} />
         </Stack>
       </ThemeProvider>

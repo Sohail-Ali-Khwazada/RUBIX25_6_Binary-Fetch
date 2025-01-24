@@ -30,8 +30,8 @@ const ProductList = () => {
         );
         const data = await response.json();
 
-        const product_name = data.product.product_name;
-        const eco = data.product.ecoscore_score;
+        const product_name = data.product.product_name || "Unknown Product";
+        const eco = data.product.ecoscore_score || 30;
         const categories = data.product.categories_old || [];
 
         setProductname(product_name);

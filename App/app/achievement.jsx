@@ -1,13 +1,15 @@
 import { useGlobalContext } from "@/context/GlobalProvider";
+import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, Animated, TouchableOpacity } from "react-native";
 
 const achievements = [
   {
     id: 1,
-    title: 'Eco Explorer 🌱',
+    title: 'Green Guardian 🌱',
     description: 'Log eco-friendly products with low CO2 emissions.',
-    point:50
+    point:50,
+    img_name: 'green-guardian.png'
   },
   {
     id: 2,
@@ -19,7 +21,8 @@ const achievements = [
     id: 3,
     title: 'Sugar Buster 🍬❌',
     description: 'Buy products with low sugar content.',
-    point:150
+    point:10,
+    img_name: 'sugar-buster.jpg'
   },
   {
     id: 4,
@@ -39,6 +42,7 @@ const achievements = [
     title: 'Organic Advocate 🌾',
     description: 'Support organic products and farmers.',
     point:10,
+    img_name: 'green-guardian.jpg'
   }
 ];
 
@@ -67,6 +71,15 @@ const Achievements = () => {
     fetchPoints();
   },[flagAchievements]);
 
+  const handlePost = (item) =>{
+    console.log('Post');
+    router.push({
+      pathname: '/rewards/[badge]',
+      params: { badge: JSON.stringify(item) }
+    });
+    // router.push(`/rewards/${item}`);
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sustainability Achievements</Text>
@@ -80,7 +93,9 @@ const Achievements = () => {
               <Text style={styles.cardTitle}>
                 {item.title} <Text style={styles.cardSubtitle}>{`(${item.point} Green Score)`}</Text>
               </Text>
-              <TouchableOpacity style={styles.badgeContainer}>
+              <TouchableOpacity style={styles.badgeContainer} onPress={()=>handlePost(item)}
+                disabled={Math.round((currentGreenPoints/item.point) * 100) < 100}
+              >
                 {Math.round((currentGreenPoints/item.point) * 100) >= 100 ? <Text style={styles.unlocked}>✅</Text> : <Text style={styles.locked}>🔒</Text>}
               </TouchableOpacity>
             </View>

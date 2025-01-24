@@ -1,14 +1,14 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
 import { useGlobalContext } from "@/context/GlobalProvider"; // Assuming you're using a global context to manage user state
 import { useRouter } from "expo-router"; // Importing useRouter for navigation
 import { LinearGradient } from "expo-linear-gradient"; // Adding gradient background for a fresh look
 
 const ProfilePage = () => {
   // Assuming user data is stored in global context
-  // const { user, setUser } = useGlobalContext();
-  const setUser = null;
-  const user={"_id": "679280408a9bd09d9a1c1952", "profilePic": "https://avatar.iran.liara.run/public/boy?username=Ashishq", "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzkyODA0MDhhOWJkMDlkOWExYzE5NTIiLCJpYXQiOjE3Mzc2NTY2NzIsImV4cCI6MTczODk1MjY3Mn0.WGZx68-MMCzYpKEwnufWMVF3HKofuiqgIfeOAg7w8vQ", "username": "Ashishq"}
+  const { user, setUser } = useGlobalContext();
+  // const setUser = null;
+  // const user={"_id": "679280408a9bd09d9a1c1952", "profilePic": "https://avatar.iran.liara.run/public/boy?username=Ashishq", "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzkyODA0MDhhOWJkMDlkOWExYzE5NTIiLCJpYXQiOjE3Mzc2NTY2NzIsImV4cCI6MTczODk1MjY3Mn0.WGZx68-MMCzYpKEwnufWMVF3HKofuiqgIfeOAg7w8vQ", "username": "Ashishq"}
 
   const router = useRouter();
 
@@ -22,7 +22,7 @@ const ProfilePage = () => {
       colors={["#6DBE45", "#A4D68C", "#A3C5B9"]} // Earthy green gradient for background
       style={styles.container}
     >
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <SafeAreaView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.profileCard}>
           {/* Profile Image */}
           <Image source={{ uri: user?.profilePic }} style={styles.profilePic} />
@@ -34,15 +34,17 @@ const ProfilePage = () => {
           <Text style={styles.bio}>Eco-conscious traveler 🌍🌱</Text>
 
           {/* Profile Actions */}
-          <TouchableOpacity style={styles.button} onPress={()=> router.push("/badge")}>
-            <Text style={styles.buttonText}>Badge</Text>
+          <TouchableOpacity style={styles.button} onPress={()=> router.push("/achievement")}>
+            <Text style={styles.buttonText}>See Achievements</Text>
           </TouchableOpacity>
+
 
           <TouchableOpacity style={styles.button} onPress={handleLogout}>
             <Text style={styles.buttonText}>Logout</Text>
           </TouchableOpacity>
+
         </View>
-      </ScrollView>
+      </SafeAreaView>
     </LinearGradient>
   );
 };

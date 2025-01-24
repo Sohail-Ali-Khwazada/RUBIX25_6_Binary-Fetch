@@ -28,3 +28,14 @@ export const updatePoints = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
+export const getLeaderboard = async (req, res) => {
+  try {
+    const leaderboard = await User.find({}).sort({ GreenPoints: -1 }).select("-password");
+    res.status(200).json(leaderboard);
+  } catch (error) {
+    console.log("Error in getLeaderboard in user controller", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}

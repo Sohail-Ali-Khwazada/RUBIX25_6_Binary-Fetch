@@ -13,13 +13,13 @@ import { useRouter } from "expo-router"; // Import useRouter for navigation
 import { useGlobalContext } from "@/context/GlobalProvider"; // Global context for managing user state
 
 const SignUpPage = () => {
-  const { setUser, loading, setLoading } = useGlobalContext();
+  const { setUser, loading, setLoading, language } = useGlobalContext();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const router = useRouter();
-
+  
   const handleSubmit = async () => {
     try {
       if (!username || !password) {
@@ -57,7 +57,7 @@ const SignUpPage = () => {
   };
 
   const handleLoginRedirect = () => {
-    router.push("/sign-in"); // Redirect to the login page if user already has an account
+    router.push("/sign-up"); // Redirect to the login page if user already has an account
   };
 
   return (
